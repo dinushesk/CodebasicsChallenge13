@@ -1,5 +1,5 @@
 -- An online SQL formatter was used to improve query readability which is a great practice, as it makes the code easier to understand, maintain, and debug --
--- Top Performing Cities by Total Trips --
+-- 1.1 Top Performing Cities by Total Trips --
 SELECT 
     c.city_name,
     COUNT(t.trip_id) AS total_trips
@@ -13,7 +13,7 @@ ORDER BY
     total_trips DESC
 LIMIT 3;
 
--- Bottom 3 Cities by Total trips--
+--1.2 Bottom 3 Cities by Total trips--
 SELECT 
     c.city_name,
     COUNT(t.trip_id) AS total_trips
@@ -27,7 +27,7 @@ ORDER BY
     total_trips ASC
 LIMIT 3;
 
--- Highest Average Fare Per Trip by City --
+-- 2.1 Highest Average Fare Per Trip by City --
 SELECT 
     c.city_name,
     AVG(t.fare_amount) AS avg_fare_per_city
@@ -41,7 +41,7 @@ ORDER BY
     avg_fare_per_city DESC
 LIMIT 3;
 
--- Lowest Average Fare Per Trip by City --
+--2.2 Lowest Average Fare Per Trip by City --
 SELECT 
     c.city_name,
     AVG(t.fare_amount) AS avg_fare_per_city
@@ -55,7 +55,7 @@ ORDER BY
     avg_fare_per_city ASC
 LIMIT 3;
 
--- Average Fare per Trip by City & Average distance travelled  --
+--2.3 Average Fare per Trip by City & Average distance travelled  --
 
 SELECT 
     c.city_name,
@@ -70,7 +70,7 @@ GROUP BY
 ORDER BY 
     avg_fare_per_trip DESC;
     
--- Average Ratings by City & Passenger type  --
+--3. Average Ratings by City & Passenger type  --
 SELECT 
     c.city_name,
     t.passenger_type,
@@ -85,7 +85,7 @@ GROUP BY
 ORDER BY 
     avg_passenger_rating DESC;
 
--- Peak and Low Demand Months by City--
+--4. Peak and Low Demand Months by City--
 WITH CityMonthTrips AS (
     SELECT 
         c.city_name,
@@ -118,7 +118,7 @@ FROM
 WHERE 
     ranking = 1;
 
--- Weekday vs Weekend Trip Demand by City --
+--5. Weekday vs Weekend Trip Demand by City --
 
 SELECT 
 c.city_name,
@@ -132,7 +132,7 @@ f.city_id=c.city_id
 GROUP BY city_name
 ORDER BY weekday_total desc
 
--- Repeat passenger Frequency and City Contribution Analysis --
+--6. Repeat passenger Frequency and City Contribution Analysis --
 
 SELECT
     c.city_name,
@@ -149,7 +149,7 @@ GROUP BY
 ORDER BY 
     c.city_name, r.trip_count;
     
-    -- Monthly Target Achievement Analysis for Key Matrics--
+    --7. Monthly Target Achievement Analysis for Key Matrics--
 SELECT 
     c.city_name,
     d.month_name,
@@ -185,7 +185,7 @@ GROUP BY
 ORDER BY 
     c.city_name, d.month_name;
     
-    -- Highest and Lowest RPR % for each city-- 
+    --8.1 Highest and Lowest RPR % for each city-- 
     
     WITH CityRPR AS (
     SELECT 
@@ -222,7 +222,7 @@ WHERE
 ORDER BY 
     city_category, RPRPercentage DESC;
 
-   -- Calculate the Repeat Passenger Rate (RPR%) for each city for each month--
+   --8.2 Calculate the Repeat Passenger Rate (RPR%) for each city for each month--
     SELECT
         c.city_name,
         EXTRACT(MONTH FROM d.date) AS month,
